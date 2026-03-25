@@ -123,6 +123,23 @@ func (h *Handler) getDefaultAgent() agent.Agent {
 	return h.agents[h.defaultName]
 }
 
+// isKnownAgent checks if a name corresponds to a configured agent.
+func (h *Handler) isKnownAgent(name string) bool {
+	h.mu.RLock()
+	defer h.mu.RUnlock()
+	// Check running agents
+	if _, ok := h.agents[name]; ok {
+		return true
+	}
+	// Check configured agents (metas)
+	for _, meta := range h.agentMetas {
+		if meta.Name == name {
+			return true
+		}
+	}
+	return false
+}
+
 // agentAliases maps short aliases to agent config names.
 var agentAliases = map[string]string{
 	"cc":  "claude",
@@ -258,10 +275,25 @@ func (h *Handler) HandleMessage(ctx context.Context, client *ilink.Client, msg i
 
 	if agentName != "" {
 		if message == "" {
-			// "/cc" or "/codex" with no message — switch default agent
-			reply = h.switchDefault(ctx, agentName)
+			// "/xxx" with no message:
+			// - If it's a known agent -> switch default
+			// - Otherwise -> forward entire text to default agent (e.g. /status for openclaw)
+			if h.isKnownAgent(agentName) {
+				reply = h.switchDefault(ctx, agentName)
+			} else {
+				agentName = ""
+				needsAgent = true
+			}
 		} else {
-			needsAgent = true
+			// "/xxx message":
+			// - If it's a known agent -> route to it
+			// - Otherwise -> forward entire text to default agent
+			if !h.isKnownAgent(agentName) {
+				agentName = ""
+				needsAgent = true
+			} else {
+				needsAgent = true
+			}
 		}
 	} else {
 		needsAgent = true
